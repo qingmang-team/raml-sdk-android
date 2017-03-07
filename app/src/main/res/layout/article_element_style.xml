@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/li"
+        style="@style/TextAppearance.Body"
+        android:layout_marginRight="@dimen/article_item_li_hori_margin"
+        android:layout_width="@dimen/article_item_li_width"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:orientation="vertical"/>
+
+    <View
+        android:id="@+id/blockquote"
+        android:layout_width="@dimen/article_item_bq_width"
+        android:layout_marginRight="@dimen/article_item_bq_hori_margin"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:background="@color/black"/>
+</merge>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="blockquote" type="id"/>
+    <item name="li" type="id"/>
+    <item name="recycler_view" type="id"/>
+    <item name="title_view" type="id"/>
+    <item name="subtitle_view" type="id"/>
+    <item name="description_view" type="id"/>
+    <item name="meta_view" type="id"/>
+    <item name="provider_view" type="id"/>
+    <item name="icon_view" type="id"/>
+    <item name="cover_view" type="id"/>
+    <item name="action_button" type="id"/>
+    <item name="author_view" type="id"/>
+    <item name="user_name_view" type="id"/>
+    <item name="user_avatar_view" type="id"/>
+
+    <item name="binder" type="id"/>
+    <item name="type" type="id"/>
+
+    <!--property -->
+    <item name="p_entity" type="id"/>
+    <item name="p_record" type="id"/>
+    <item name="p_user" type="id"/>
+    <item name="p_channel" type="id"/>
+    <item name="p_records" type="id"/>
+    
+    <item name="tag_layout_id" type="id"/>
+    <item name="tag_presenter_id" type="id"/>
+    <item name="nirvana_card_bg" type="drawable"/>
+</resources>

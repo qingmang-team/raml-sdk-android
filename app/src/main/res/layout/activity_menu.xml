@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/root"
+              android:orientation="vertical"
+              android:gravity="center_horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/select"
+        android:text="选择文件"
+        android:textColor="@color/text_title"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
+
+    <TextView
+        android:id="@+id/sample"
+        android:text="查看示例"
+        android:textColor="@color/text_title"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
+</LinearLayout>

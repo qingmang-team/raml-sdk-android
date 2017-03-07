@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#666666</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="trans_black">#7f000000</color>
+    <color name="red">#ef5149</color>
+    <color name="link_color">#3498db</color>
+
+    <color name="text_title">#282828</color>
+    <color name="text_subtitle">#333333</color>
+    <color name="text_description">#999999</color>
+    <color name="text_meta">#555555</color>
+    <color name="text_body">#333333</color>
+</resources>
