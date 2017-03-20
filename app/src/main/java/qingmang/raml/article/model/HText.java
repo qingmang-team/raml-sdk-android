@@ -121,9 +121,8 @@ public class HText implements ITags {
             break;
           case img:
             String src = markup.source;
-            float d = RamlApplication.getInstance().getResources().getDisplayMetrics().density;
             WebImageDrawable imageDrawable = new WebImageDrawable(Resources.getSystem(), src);
-            imageDrawable.setBounds(0, 0, (int) (d * markup.width), (int) (d * markup.height));
+            imageDrawable.setBounds(0, 0, markup.width, markup.height);
             imageDrawable.load();
             imageDrawable.getIntrinsicHeight();
             spans.add(new WebImageSpan(imageDrawable, src, WebImageSpan.ALIGN_CENTER));
