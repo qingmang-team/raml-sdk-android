@@ -47,9 +47,10 @@ public class ImageController {
       draweeView.setImageURI("");
       return;
     }
-    if (width > 0 && width < 300) {
-      float density = RamlApplication.getInstance().getResources().getDisplayMetrics().density;
-      draweeView.getLayoutParams().width = (int) (width * density);
+    float screenWidth = RamlApplication.getInstance().getResources().getDisplayMetrics().widthPixels;
+    int threshold = Math.round(screenWidth / 2);
+    if (width > 0 && width < threshold) {
+      draweeView.getLayoutParams().width = width;
     } else {
       draweeView.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
     }

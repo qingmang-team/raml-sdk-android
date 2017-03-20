@@ -6,6 +6,17 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.text.TextUtils;
+
+import com.facebook.common.references.CloseableReference;
+import com.facebook.datasource.DataSource;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.facebook.imagepipeline.image.CloseableBitmap;
+import com.facebook.imagepipeline.image.CloseableImage;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import qingmang.raml.R;
 import qingmang.raml.RamlApplication;
@@ -31,15 +42,13 @@ public class WebImageDrawable extends Drawable {
    * @return
    */
   public void load() {
-    this.drawable = (BitmapDrawable) RamlApplication.getInstance().getDrawable(R.drawable.icon);
-    // load bitmap here
-//    Bitmap bitmap = ImageLoader.getCacheImage(imageUrl);
-//    if (bitmap != null) {
-//      this.drawable = new BitmapDrawable(resources, Bitmap.createBitmap(bitmap));
-//      this.drawable.setBounds(getBounds());
-//    } else {
-//      ImageLoader.prefetch(imageUrl);
-//    }
+    Bitmap bitmap = getCacheImage(imageUrl);
+    if (bitmap != null) {
+      this.drawable = new BitmapDrawable(resources, Bitmap.createBitmap(bitmap));
+      this.drawable.setBounds(getBounds());
+    } else {
+      prefetch(imageUrl);
+    }
   }
 
   @Override
@@ -75,5 +84,55 @@ public class WebImageDrawable extends Drawable {
       return drawable.getOpacity();
     }
     return 0;
+  }
+
+  /**
+   * 同步返回 cache image，如果没有 cache，返回 null
+   * 有个问题，当图片是 gif 的时候，imageReference 一直返回 null，还没有查是什么原因
+   *
+   * @param url
+   * @return
+   */
+  public static Bitmap getCacheImage(String url) {
+    if (TextUtils.isEmpty(url)) {
+      return null;
+    }
+    final ImagePipeline imagePipeline = Fresco.getImagePipeline();
+    ImageRequestBuilder imageRequestBuilder =
+        ImageRequestBuilder.newBuilderWithSource(Uri.parse(url));
+    final ImageRequest imageRequest = imageRequestBuilder.build();
+    DataSource<CloseableReference<CloseableImage>> dataSource =
+        imagePipeline.fetchImageFromBitmapCache(imageRequest, null);
+    try {
+      CloseableReference<CloseableImage> imageReference = dataSource.getResult();
+      if (imageReference != null) {
+        try {
+          CloseableImage image = imageReference.get();
+          if (image instanceof CloseableBitmap) {
+            return ((CloseableBitmap) image).getUnderlyingBitmap();
+          } else {
+            return null;
+          }
+          // do something with the image
+        } finally {
+          CloseableReference.closeSafely(imageReference);
+        }
+      }
+    } finally {
+      dataSource.close();
+    }
+    return null;
+  }
+
+  /**
+   * 预取图片.
+   *
+   * @param imageUrl
+   */
+  public static void prefetch(String imageUrl) {
+    final ImagePipeline imagePipeline = Fresco.getImagePipeline();
+    final ImageRequest imageRequest =
+        ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageUrl)).build();
+    imagePipeline.prefetchToBitmapCache(imageRequest, null);
   }
 }
